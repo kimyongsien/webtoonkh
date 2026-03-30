@@ -1,0 +1,51 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: webtoon-v2-app
+    env_file:
+      - .env.docker.example
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - storage_public:/var/www/html/storage/app/public
+    restart: unless-stopped
+
+  web:
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    container_name: webtoon-v2-web
+    depends_on:
+      - app
+    ports:
+      - "8080:80"
+    volumes:
+      - storage_public:/var/www/html/storage/app/public
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.4
+    container_name: webtoon-v2-db
+    environment:
+      MYSQL_DATABASE: webtoon_v2
+      MYSQL_USER: webtoon
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-proot"]
+      timeout: 5s
+      retries: 10
+      interval: 5s
+      start_period: 20s
+    restart: unless-stopped
+
+volumes:
+  db_data:
+  storage_public:
