@@ -3,13 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Story;
 use App\Models\Category;
+use App\Models\Story;
+use App\Services\CloudinaryService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class StoryController extends Controller
 {
+    public function __construct(
+        private CloudinaryService $cloudinary,
+    ) {
+    }
+
     public function index()
     {
         $stories = Story::with('category')->latest()->paginate(10);
@@ -33,8 +38,11 @@ class StoryController extends Controller
         ]);
 
         $coverPath = null;
+        $coverPublicId = null;
         if ($request->hasFile('cover') && $request->file('cover')->isValid()) {
-            $coverPath = $request->file('cover')->store('covers', 'public');
+            $upload = $this->cloudinary->uploadImage($request->file('cover'), 'webtoonkh/stories');
+            $coverPath = $upload['secure_url'];
+            $coverPublicId = $upload['public_id'];
         }
 
         Story::create([
@@ -42,6 +50,7 @@ class StoryController extends Controller
             'description' => $data['description'] ?? null,
             'category_id' => $data['category_id'],
             'cover_path' => $coverPath,
+            'cover_public_id' => $coverPublicId,
             'youtube_url' => $data['youtube_url'] ?? null,
             'views' => 0,
         ]);
@@ -66,10 +75,12 @@ class StoryController extends Controller
         ]);
 
         if ($request->hasFile('cover') && $request->file('cover')->isValid()) {
-            if ($story->cover_path) {
-                Storage::disk('public')->delete($story->cover_path);
+            if ($story->cover_public_id) {
+                $this->cloudinary->destroyImage($story->cover_public_id);
             }
-            $story->cover_path = $request->file('cover')->store('covers', 'public');
+            $upload = $this->cloudinary->uploadImage($request->file('cover'), 'webtoonkh/stories');
+            $story->cover_path = $upload['secure_url'];
+            $story->cover_public_id = $upload['public_id'];
         }
 
         $story->title = $data['title'];
@@ -83,8 +94,8 @@ class StoryController extends Controller
 
     public function destroy(Story $story)
     {
-        if ($story->cover_path) {
-            Storage::disk('public')->delete($story->cover_path);
+        if ($story->cover_public_id) {
+            $this->cloudinary->destroyImage($story->cover_public_id);
         }
 
         $story->delete();

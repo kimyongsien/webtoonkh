@@ -29,7 +29,7 @@
                     
                     <!-- Background Image (Blurred) -->
                     <div class="absolute inset-0 bg-cover bg-center opacity-40 blur-sm transform scale-110" 
-                         style="background-image: url('{{ $story->cover_path ? Storage::url($story->cover_path) : '' }}');">
+                         style="background-image: url('{{ $story->cover_url ?? '' }}');">
                     </div>
                     
                     <!-- Gradient Overlay -->
@@ -41,7 +41,7 @@
                             <!-- Story Cover (Floating Card) -->
                             <div class="hidden md:block w-56 h-80 flex-shrink-0 rounded-lg shadow-2xl overflow-hidden border-2 border-white/10 transform -rotate-3 hover:rotate-0 transition-transform duration-500 z-10">
                                 @if($story->cover_path)
-                                    <img src="{{ Storage::url($story->cover_path) }}" class="w-full h-full object-cover">
+                                    <img src="{{ $story->cover_url }}" class="w-full h-full object-cover">
                                 @else
                                     <div class="w-full h-full bg-gray-800 flex items-center justify-center text-white">No Cover</div>
                                 @endif
@@ -111,19 +111,14 @@
                             <a href="{{ route('stories.show', $story) }}" class="group block">
                                 <div class="relative aspect-[2/3] rounded-lg overflow-hidden bg-gray-100 mb-3 shadow-sm hover:shadow-md transition-all">
                                     @if($story->cover_path)
-                                        <img src="{{ Storage::url($story->cover_path) }}" alt="{{ $story->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                        <img src="{{ $story->cover_url }}" alt="{{ $story->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                                     @else
                                         <div class="flex items-center justify-center h-full text-gray-400">
                                             <svg class="w-12 h-12 opacity-20" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path></svg>
                                         </div>
                                     @endif
                                     
-                                    <!-- New Badge -->
-                                    @if(now()->diffInDays($story->created_at) <= 7)
-                                        <div class="absolute top-2 left-2">
-                                            <span class="bg-primary-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded uppercase shadow-sm">UP</span>
-                                        </div>
-                                    @endif
+
                                 </div>
 
                                 <div>
@@ -159,9 +154,7 @@
                     <div class="sticky top-32">
                         <div class="flex justify-between items-baseline mb-6 border-b border-gray-100 pb-2">
                             <h3 class="text-xl font-heading font-bold text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">Hottest</h3>
-                            <a href="{{ route('home', ['sort' => 'popular']) }}" class="text-xs font-bold text-white drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)] hover:text-gray-200 flex items-center gap-1">
-                                View All <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                            </a>
+
                         </div>
                         
                         <div class="flex flex-col gap-5">
@@ -169,7 +162,7 @@
                                 <a href="{{ route('stories.show', $story) }}" class="flex items-center gap-4 group">
                                     <div class="relative w-20 h-28 flex-shrink-0 rounded-lg overflow-hidden shadow-sm bg-gray-200">
                                         @if($story->cover_path)
-                                            <img src="{{ Storage::url($story->cover_path) }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                            <img src="{{ $story->cover_url }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
                                         @endif
                                         
                                         <!-- Ranking Number -->

@@ -32,7 +32,7 @@
                                 <tr class="border-b align-top">
                                     <td class="py-2">
                                         @if($story->cover_path)
-                                            <img src="{{ asset('storage/'.$story->cover_path) }}" class="h-16 w-12 object-cover rounded" />
+                                            <img src="{{ $story->cover_url }}" class="h-16 w-12 object-cover rounded" />
                                         @else
                                             <div class="h-16 w-12 bg-gray-200 rounded"></div>
                                         @endif

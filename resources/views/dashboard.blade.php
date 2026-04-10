@@ -35,7 +35,7 @@
                             <a href="{{ route('stories.show', $list->story) }}" class="group">
                                 <div class="aspect-[2/3] bg-gray-200 overflow-hidden rounded mb-2">
                                      @if($list->story->cover_path)
-                                        <img src="{{ Storage::url($list->story->cover_path) }}" class="w-full h-full object-cover">
+                                        <img src="{{ $list->story->cover_url }}" class="w-full h-full object-cover">
                                     @endif
                                 </div>
                                 <div class="text-sm font-medium truncate">{{ $list->story->title }}</div>
@@ -56,7 +56,7 @@
                             <a href="{{ route('stories.show', $list->story) }}" class="group">
                                 <div class="aspect-[2/3] bg-gray-200 overflow-hidden rounded mb-2">
                                      @if($list->story->cover_path)
-                                        <img src="{{ Storage::url($list->story->cover_path) }}" class="w-full h-full object-cover">
+                                        <img src="{{ $list->story->cover_url }}" class="w-full h-full object-cover">
                                     @endif
                                 </div>
                                 <div class="text-sm font-medium truncate">{{ $list->story->title }}</div>
@@ -77,7 +77,7 @@
                             <a href="{{ route('stories.show', $history->story) }}" class="flex items-start gap-4 p-2 hover:bg-gray-50 rounded">
                                 <div class="w-16 h-24 bg-gray-200 shrink-0 overflow-hidden rounded">
                                     @if($history->story->cover_path)
-                                        <img src="{{ Storage::url($history->story->cover_path) }}" class="w-full h-full object-cover">
+                                        <img src="{{ $history->story->cover_url }}" class="w-full h-full object-cover">
                                     @endif
                                 </div>
                                 <div>

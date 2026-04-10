@@ -44,7 +44,7 @@
                         <div>
                             <label class="block font-medium text-sm text-gray-700">Cover (image)</label>
                             @if($story->cover_path)
-                                <img src="{{ asset('storage/'.$story->cover_path) }}" class="h-24 w-20 object-cover rounded mb-2" />
+                                <img src="{{ $story->cover_url }}" class="h-24 w-20 object-cover rounded mb-2" />
                             @endif
                             <input type="file" name="cover" class="mt-1 w-full" accept="image/*" />
                         </div>

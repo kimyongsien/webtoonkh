@@ -55,7 +55,8 @@ class StoryController extends Controller
         $stories = Story::where('title', 'like', "%{$query}%")
                         ->select('id', 'title', 'cover_path')
                         ->limit(10)
-                        ->get();
+                        ->get()
+                        ->append('cover_url');
         return response()->json($stories);
     }
 

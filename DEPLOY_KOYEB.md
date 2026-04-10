@@ -19,6 +19,7 @@ You need:
 - A GitHub repo with this project
 - A Koyeb account
 - A MySQL database
+- A Cloudinary account for image uploads
 
 ## Deploy steps
 
@@ -44,6 +45,9 @@ FILESYSTEM_DISK=public
 SESSION_DRIVER=database
 CACHE_STORE=database
 QUEUE_CONNECTION=database
+CLOUDINARY_CLOUD_NAME=your-cloudinary-cloud-name
+CLOUDINARY_API_KEY=your-cloudinary-api-key
+CLOUDINARY_API_SECRET=your-cloudinary-api-secret
 ```
 
 7. Deploy the service.
@@ -51,14 +55,11 @@ QUEUE_CONNECTION=database
 
 ## File uploads
 
-This app stores story and category images in Laravel's public storage:
+This app now uploads story and category images to Cloudinary.
 
-- `storage/app/public/covers`
-- `storage/app/public/category_covers`
-
-For a short classroom demo, local disk storage is okay.
-
-For a longer-lived public deployment, use object storage later because container filesystems are often ephemeral.
+- The database stores the returned image URL
+- It also stores the Cloudinary public ID so replacements and deletes can clean up old assets
+- This avoids relying on Koyeb's ephemeral local disk for image uploads
 
 ## What this image does on startup
 
@@ -71,4 +72,4 @@ The deployment entrypoint:
 
 ## After deploy
 
-Create your admin account from the Koyeb shell or by running an artisan command in the service container, then log in and add demo content.
+Run migrations, create your admin account from the Koyeb shell or by running an artisan command in the service container, then log in and add demo content.

@@ -10,7 +10,7 @@
                             <!-- Cover Image -->
                             <div class="aspect-[2/3] relative group">
                                 @if($story->cover_path)
-                                    <img src="{{ Storage::url($story->cover_path) }}" alt="{{ $story->title }}" class="w-full h-full object-cover">
+                                    <img src="{{ $story->cover_url }}" alt="{{ $story->title }}" class="w-full h-full object-cover">
                                 @else
                                      <div class="w-full h-full bg-gray-200 flex items-center justify-center text-gray-400">No Cover</div>
                                 @endif

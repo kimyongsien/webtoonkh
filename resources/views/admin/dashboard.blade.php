@@ -60,7 +60,7 @@
                                 <div class="flex items-center gap-4">
                                     <div class="w-12 h-16 bg-gray-200 shrink-0 overflow-hidden rounded">
                                         @if($story->cover_path)
-                                            <img src="{{ Storage::url($story->cover_path) }}" class="w-full h-full object-cover">
+                                            <img src="{{ $story->cover_url }}" class="w-full h-full object-cover">
                                         @endif
                                     </div>
                                     <div class="flex-1 min-w-0">
@@ -88,7 +88,7 @@
                                 <div class="flex items-center gap-4">
                                      <div class="w-12 h-16 bg-gray-200 shrink-0 overflow-hidden rounded">
                                         @if($story->cover_path)
-                                            <img src="{{ Storage::url($story->cover_path) }}" class="w-full h-full object-cover">
+                                            <img src="{{ $story->cover_url }}" class="w-full h-full object-cover">
                                         @endif
                                     </div>
                                     <div class="flex-1 min-w-0">

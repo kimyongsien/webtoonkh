@@ -5,9 +5,19 @@
             <div class="flex justify-between h-16 items-center">
                 <!-- Left: Hamburger & Logo -->
                 <div class="flex items-center gap-4">
-                    <!-- Hamburger Menu -->
+                    <!-- Person Setting Icon -->
                     <button @click="open = ! open" class="p-2 rounded-md text-gray-800 hover:bg-gray-100 transition-colors">
-                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <circle cx="19" cy="11" r="3"></circle>
+                            <path d="M19 16v-2"></path>
+                            <path d="M19 8v-2"></path>
+                            <path d="M22.03 12.52l-1.6-.92"></path>
+                            <path d="M17.57 9.94l-1.6-.92"></path>
+                            <path d="M22.03 9.48l-1.6.92"></path>
+                            <path d="M17.57 12.06l-1.6.92"></path>
+                        </svg>
                     </button>
 
                     <!-- Logo -->
@@ -141,7 +151,7 @@
                                              <a :href="`/story/${story.id}`" class="flex items-center gap-4 p-2 hover:bg-gray-50 rounded-2xl transition-colors group">
                                                  <div class="w-12 h-16 bg-gray-200 rounded-lg object-cover overflow-hidden flex-shrink-0 shadow-sm border border-gray-100">
                                                      <template x-if="story.cover_path">
-                                                         <img :src="`/storage/${story.cover_path}`" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                                         <img :src="story.cover_url" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                                                      </template>
                                                  </div>
                                                  <div class="flex-1 min-w-0">
@@ -175,8 +185,6 @@
              x-transition:leave-end="opacity-0 -translate-x-10 scale-95"
              class="absolute top-[80px] left-4 sm:left-6 z-[100] w-[340px] rounded-[45px] shadow-[0_20px_50px_-10px_rgba(0,0,0,0.3)] p-6 overflow-hidden bg-white">
              
-             <!-- Decorative Top Left Line -->
-             <div class="absolute top-8 left-0 w-[85%] border-t-[1px] border-pink-200 z-0"></div>
              <!-- Decorative Top Right Curve -->
              <div class="absolute top-0 right-[-10px] w-32 h-32 border-t-[1px] border-r-[1px] border-pink-200 rounded-tr-[50px] transform translate-x-4 -translate-y-4 z-0"></div>
              <!-- Decorative Bottom Left Curve -->
@@ -185,7 +193,6 @@
              <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 w-[70%] border-b-[2px] border-pink-200 z-0"></div>
 
              <div class="relative z-10 pb-4">
-
                  <!-- Profile 1: Sine Kimyong -->
                  <div class="flex items-start gap-4 px-1 mb-6 relative z-10 pt-2">
                      <div class="flex flex-col items-center">
@@ -226,17 +233,8 @@
 
                  <!-- Background Motivation -->
                  <div class="bg-[#fafafa] border-[3px] border-[#0ea5e9] w-full h-[320px] mb-5 p-3 relative z-10">
-                     <h5 class="text-black font-extrabold text-[11px]">Background Motivation</h5>
-                     <h3 class="">Background Motivation</h5>
-                 </div>
-
-                 <!-- Bottom Boxes -->
-                 <div class="flex gap-4 justify-center relative z-10">
-                     <div class="bg-[#fafafa] w-[130px] h-[140px] p-2.5">
-                         <h4 class="text-black font-extrabold text-[6px]">Sien KimYong</h4>
-                     </div>
-                     <div class="bg-[#fafafa] w-[130px] h-[140px]">
-                     </div>
+                     <p class="text-black font-extrabold text-[15px]">Background Motivation</p>
+                     <p class="text-black text-[14px]">This project aims to help users learn English through reading digital story content in an engaging and easy-to-use platform. By combining storytelling with learning, users can improve their language skills in a more enjoyable and accessible way, while keeping the platform free for everyone.</p>
                  </div>
              </div>
         </div>

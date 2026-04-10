@@ -10,11 +10,11 @@
                         <!-- Image Container -->
                         <div class="aspect-square bg-gray-200 mb-6 overflow-hidden relative shadow-inner">
                             @if($category->image_path)
-                                <img src="{{ Storage::url($category->image_path) }}" 
+                                <img src="{{ $category->image_url }}" 
                                      alt="{{ $category->name }}" 
                                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out">
                             @elseif($category->stories->isNotEmpty() && $category->stories->first()->cover_path)
-                                <img src="{{ Storage::url($category->stories->first()->cover_path) }}" 
+                                <img src="{{ $category->stories->first()->cover_url }}" 
                                      alt="{{ $category->name }}" 
                                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out">
                             @else
