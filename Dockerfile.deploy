@@ -29,6 +29,7 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         git \
         libicu-dev \
+        libpq-dev \
         libzip-dev \
         unzip \
         zip \
@@ -36,6 +37,8 @@ RUN apt-get update \
         bcmath \
         intl \
         pdo_mysql \
+        pdo_pgsql \
+        pgsql \
         zip \
     && a2enmod rewrite \
     && rm -rf /var/lib/apt/lists/*
