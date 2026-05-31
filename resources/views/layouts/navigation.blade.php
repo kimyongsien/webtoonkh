@@ -87,6 +87,7 @@
                     @endauth
                     
                     <!-- Search Component -->
+                    @unless(request()->is('admin*'))
                     <div x-data="{ 
                             searchOpen: false, 
                             query: '', 
@@ -169,6 +170,7 @@
                              </div>
                         </div>
                     </div>
+                    @endunless
                 </div>
             </div>
         </div>

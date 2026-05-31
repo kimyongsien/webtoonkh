@@ -27,21 +27,21 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                    <div class="text-gray-500 text-sm font-medium uppercase">Total Stories</div>
-                    <div class="text-3xl font-bold">{{ number_format($stats['total_stories']) }}</div>
+                <div class="overflow-hidden rounded-2xl p-7 bg-[#2f7bd1] text-white shadow-lg shadow-blue-500/20">
+                    <div class="text-5xl font-extrabold tracking-tight">{{ number_format($stats['total_stories']) }}</div>
+                    <div class="mt-4 text-lg font-bold">Total Stories</div>
                 </div>
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                    <div class="text-gray-500 text-sm font-medium uppercase">Total Categories</div>
-                    <div class="text-3xl font-bold">{{ number_format($stats['total_categories']) }}</div>
+                <div class="overflow-hidden rounded-2xl p-7 bg-[#4b2fbd] text-white shadow-lg shadow-indigo-500/20">
+                    <div class="text-5xl font-extrabold tracking-tight">{{ number_format($stats['total_categories']) }}</div>
+                    <div class="mt-4 text-lg font-bold">Total Categories</div>
                 </div>
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                    <div class="text-gray-500 text-sm font-medium uppercase">Total Users</div>
-                    <div class="text-3xl font-bold">{{ number_format($stats['total_users']) }}</div>
+                <div class="overflow-hidden rounded-2xl p-7 bg-[#dc2f80] text-white shadow-lg shadow-pink-500/20">
+                    <div class="text-5xl font-extrabold tracking-tight">{{ number_format($stats['total_users']) }}</div>
+                    <div class="mt-4 text-lg font-bold">Total Users</div>
                 </div>
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                    <div class="text-gray-500 text-sm font-medium uppercase">Total Views</div>
-                    <div class="text-3xl font-bold">{{ number_format($stats['total_views']) }}</div>
+                <div class="overflow-hidden rounded-2xl p-7 bg-[#e8912a] text-white shadow-lg shadow-orange-500/20">
+                    <div class="text-5xl font-extrabold tracking-tight">{{ number_format($stats['total_views']) }}</div>
+                    <div class="mt-4 text-lg font-bold">Total Views</div>
                 </div>
             </div>
 
