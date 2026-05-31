@@ -29,12 +29,24 @@ class DashboardController extends Controller
             ->take(5)
             ->get();
 
+        $categoryViews = Category::withSum('stories', 'views')
+            ->get()
+            ->map(function (Category $category) {
+                return [
+                    'name' => $category->name,
+                    'views' => (int) ($category->stories_sum_views ?? 0),
+                ];
+            })
+            ->filter(fn (array $category) => $category['views'] > 0)
+            ->sortByDesc('views')
+            ->values();
+
         $latestComments = Feedback::with(['user', 'story.category'])
             ->whereNotNull('story_id')
             ->latest()
             ->take(2)
             ->get();
 
-        return view('admin.dashboard', compact('stats', 'recentStories', 'popularStories', 'latestComments'));
+        return view('admin.dashboard', compact('stats', 'recentStories', 'popularStories', 'categoryViews', 'latestComments'));
     }
 }
