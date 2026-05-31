@@ -39,6 +39,23 @@ class UserFeatureTest extends TestCase
         ]);
     }
 
+    public function test_user_can_save_story_to_read_later()
+    {
+        $user = User::factory()->create();
+        $category = Category::create(['name' => 'Action', 'slug' => 'action']);
+        $story = Story::create(['title' => 'Story 1', 'category_id' => $category->id]);
+
+        $response = $this->actingAs($user)
+            ->post(route('stories.toggle-list', $story), ['type' => 'read_later']);
+
+        $response->assertRedirect();
+        $this->assertDatabaseHas('user_lists', [
+            'user_id' => $user->id,
+            'story_id' => $story->id,
+            'type' => 'read_later'
+        ]);
+    }
+
     public function test_user_can_rate_story()
     {
         $user = User::factory()->create();
