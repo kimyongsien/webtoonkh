@@ -50,7 +50,7 @@
             </div>
 
             <!-- Content Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <!-- Recent Stories -->
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
                     <h3 class="text-lg font-bold mb-4">Recent Stories</h3>
@@ -100,6 +100,52 @@
                         </div>
                     @else
                         <p class="text-gray-500">No views yet.</p>
+                    @endif
+                </div>
+
+                <!-- Story Comments -->
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-bold">Story comments</h3>
+                        <a href="{{ route('admin.feedback.index') }}" class="text-sm font-semibold text-gray-900 hover:text-blue-600 transition-colors">View More&gt;</a>
+                    </div>
+
+                    @if($latestComments->count() > 0)
+                        <div class="space-y-4">
+                            @foreach($latestComments as $comment)
+                                <div>
+                                    @if($comment->story)
+                                        <div class="flex items-center gap-3 mb-2 text-xs text-gray-500">
+                                            <div class="w-8 h-10 rounded bg-gray-200 overflow-hidden shrink-0">
+                                                @if($comment->story->cover_path)
+                                                    <img src="{{ $comment->story->cover_url }}" class="w-full h-full object-cover" alt="{{ $comment->story->title }}">
+                                                @endif
+                                            </div>
+                                            <div class="min-w-0">
+                                                <div class="font-semibold text-gray-900 truncate">{{ $comment->story->title }}</div>
+                                                <div>{{ $comment->story->category->name ?? 'Uncategorized' }}</div>
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    <div class="rounded-2xl border border-gray-200 bg-white px-4 py-3 shadow-[0_4px_14px_rgba(0,0,0,0.12)]">
+                                        <div class="flex items-center gap-2 mb-2">
+                                            <div class="h-8 w-8 rounded-full bg-pink-500 text-white flex items-center justify-center text-xs font-bold shadow">
+                                                {{ strtoupper(substr($comment->user->name ?? 'A', 0, 2)) }}
+                                            </div>
+                                            <div class="font-bold text-gray-900 text-sm truncate">{{ $comment->user->name ?? 'Anonymous' }}</div>
+                                            <span class="text-gray-400 text-xs">•</span>
+                                            <div class="text-xs text-gray-500">{{ $comment->created_at->diffForHumans() }}</div>
+                                        </div>
+                                        <p class="text-sm text-gray-900 line-clamp-2">{{ $comment->message }}</p>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @else
+                        <div class="border-2 border-dashed border-cyan-300 rounded-lg p-6 text-center text-sm text-gray-500">
+                            No story comments yet.
+                        </div>
                     @endif
                 </div>
             </div>

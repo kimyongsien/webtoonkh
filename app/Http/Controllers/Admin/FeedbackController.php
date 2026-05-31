@@ -10,7 +10,11 @@ class FeedbackController extends Controller
 {
     public function index()
     {
-        $feedbacks = Feedback::latest()->paginate(15);
+        $feedbacks = Feedback::with(['user', 'story.category'])
+            ->whereNotNull('story_id')
+            ->latest()
+            ->paginate(15);
+
         return view('admin.feedback.index', compact('feedbacks'));
     }
 

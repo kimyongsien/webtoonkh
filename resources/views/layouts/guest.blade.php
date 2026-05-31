@@ -5,7 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>Webtoon KH</title>
+        <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -27,7 +28,7 @@
                     <!-- Logo -->
                     <div class="flex justify-center mb-10">
                         <a href="/">
-                            <x-application-logo class="w-14 h-14 fill-current text-gray-900" />
+                            <img src="{{ asset('images/logo.png') }}" alt="Webtoon KH" class="h-16 w-16 rounded-2xl object-cover shadow-sm">
                         </a>
                     </div>
 

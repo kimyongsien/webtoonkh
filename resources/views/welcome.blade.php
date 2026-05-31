@@ -72,7 +72,11 @@
                                             @csrf
                                             <input type="hidden" name="type" value="read_later">
                                             <button class="px-8 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-bold rounded-full transition-all border border-white/30 flex items-center gap-2">
-                                                <span>{{ $isInReadLater ? 'OK' : '+' }}</span> {{ $isInReadLater ? 'Saved' : 'My List' }}
+                                                @if($isInReadLater)
+                                                    Saved
+                                                @else
+                                                    <span>+</span> My List
+                                                @endif
                                             </button>
                                         </form>
                                     @else

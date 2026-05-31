@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Feedback;
 use App\Models\Story;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -28,6 +29,12 @@ class DashboardController extends Controller
             ->take(5)
             ->get();
 
-        return view('admin.dashboard', compact('stats', 'recentStories', 'popularStories'));
+        $latestComments = Feedback::with(['user', 'story.category'])
+            ->whereNotNull('story_id')
+            ->latest()
+            ->take(2)
+            ->get();
+
+        return view('admin.dashboard', compact('stats', 'recentStories', 'popularStories', 'latestComments'));
     }
 }
