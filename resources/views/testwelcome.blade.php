@@ -169,7 +169,7 @@
             </div>
 
             <!-- Right Column: Hottest (Sidebar) -->
-            <div class="lg:w-1/#####4">
+            <div class="lg:w-1/4">
                 @if($hottestStories->count() > 0 && !request()->hasAny(['search', 'category']))
                     <div class="sticky top-32">
                         <div class="flex justify-between items-baseline mb-6 border-b border-gray-100 pb-2">
